@@ -9,7 +9,7 @@ for filepath in filepaths:
     pdf.add_page()
     filename = Path(filepath).stem
     with open(filepath, "r") as file:
-        content = file.readline()
+        content = file.read()
         print(content)
     pdf.set_font(family="Times", size=16, style="B")
     pdf.cell(w=0, h=16, txt=filename, ln=1, border=0, align="L")
