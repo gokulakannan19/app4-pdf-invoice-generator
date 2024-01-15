@@ -32,7 +32,9 @@ for filepath in filepaths:
     pdf.cell(w=30, h=8, txt=columns[3], align="R", border=1)
     pdf.cell(w=30, h=8, txt=columns[4], align="R", border=1, ln=1)
 
+    total = 0
     for index, row in df.iterrows():
+        total += row["total_price"]
         pdf.set_font(family="Times", size=10)
         pdf.set_text_color(80, 80, 80)
         pdf.cell(w=30, h=8, txt=str(row["product_id"]), border=1)
@@ -40,6 +42,22 @@ for filepath in filepaths:
         pdf.cell(w=30, h=8, txt=str(row["amount_purchased"]), align="R", border=1)
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), align="R", border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), align="R", border=1, ln=1)
+
+    pdf.set_font(family="Times", size=10)
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=70, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", align="R", border=1)
+    pdf.cell(w=30, h=8, txt="", align="R", border=1)
+    pdf.cell(w=30, h=8, txt=str(total), align="R", border=1, ln=1)
+
+    # Add total
+    pdf.set_font(family="Times", size=10, style="B")
+    pdf.cell(w=30, h=8, txt=f"The total price is: {total}", ln=1)
+
+    # Add name
+    pdf.set_font(family="Times", size=10, style="B")
+    pdf.cell(w=25, h=8, txt=f"goks-pdf-convertor", ln=1)
 
     pdf.output(f"PDFs/{filename}.pdf")
 
